@@ -1,6 +1,6 @@
 #This code was written by Boidushya Bhattacharya and Gustav Wallström (github/sudoxd) on Monday, 26 November 2019 at 20:27 p.m.
-#Reddit: https://reddit.com/u/Boidushya
-#Facebook: https://facebook.com/soumyadipta.despacito
+#Modified for @fourthreestash by deadauthor.org
+#https://www.facebook.com/fourthreestash
 
 import cv2
 import os
@@ -37,7 +37,7 @@ def extractFrames():
     vidcap = cv2.VideoCapture(videoFile)
     success,image = vidcap.read()
     fps = vidcap.get(cv2.CAP_PROP_FPS)
-    required_fps =2 #if you want you can change the FPS for your video here
+    required_fps =1 #if you want you can change the FPS for your video here
     #The more the fps, the more number of frames
     multiplier = round(fps/required_fps)
     x=0
@@ -48,7 +48,7 @@ def extractFrames():
 
         if frameId % multiplier == 0:
             x+=1
-            cv2.imwrite(f"assets/frames/frame{int(x):05}.jpg", image)
+            cv2.imwrite(f"assets/frames/frame{int(x):04}.jpg", image)
     vidcap.release()
 
 @catch_exceptions()
@@ -66,7 +66,7 @@ def post():
 
     currentFrame = f'assets/frames/{dir[0]}'
     currentFrameNumber = str(int(currentFrame[-8:-4]))
-    msg = f"Frame {currentFrameNumber} out of {str(totalFrames)}"
+    msg = f"Movie Name. {currentFrameNumber} of {str(totalFrames)}."
     with open('assets/token.txt','r') as token:
         accesstoken = token.readline()
     graph = facebook.GraphAPI(accesstoken)
